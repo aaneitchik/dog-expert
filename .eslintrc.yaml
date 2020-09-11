@@ -2,7 +2,11 @@ env:
   browser: true
   es6: true
   node: true
-extends: '@ridedott/eslint-config'
+extends:
+  - '@ridedott/eslint-config'
+  - 'plugin:react/recommended'
+  - 'plugin:jsx-a11y/recommended'
+  - 'plugin:react-hooks/recommended'
 overrides:
   - files: ./src/**/*spec.ts
     rules:

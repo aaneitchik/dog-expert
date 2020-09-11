@@ -38,3 +38,6 @@ lib
 
 # webpack output folder
 dist
+
+# Webstorm-specific files
+.idea
