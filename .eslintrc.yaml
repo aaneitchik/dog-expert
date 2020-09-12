@@ -28,6 +28,7 @@ rules:
   max-lines-per-function: 'off'
   max-params: 'off'
   no-implicit-coercion: 'off'
+  react/prop-types: 'off'
   unicorn/filename-case:
     - error
     - case: kebabCase
