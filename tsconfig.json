@@ -6,7 +6,7 @@
     "declaration": false,
     "declarationMap": false,
     "importHelpers": true,
-    "lib": ["DOM", "DOM.Iterable", "ES2019"],
+    "lib": ["dom", "dom.iterable", "es2019", "webworker"],
     "module": "commonjs",
     "noImplicitAny": true,
     "noImplicitReturns": true,

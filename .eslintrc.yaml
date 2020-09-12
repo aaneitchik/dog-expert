@@ -16,8 +16,22 @@ parserOptions:
   project: tsconfig.json
   sourceType: module
 rules:
+  capitalized-comments:
+    - error
+    - always
+    - ignoreConsecutiveComments: true
+  func-style: 'off'
+  immutable/no-let: 'off'
   immutable/no-mutation: 'off'
   immutable/no-this: 'off'
+  '@typescript-eslint/strict-boolean-expressions': 'off'
+  max-lines-per-function: 'off'
+  max-params: 'off'
+  no-implicit-coercion: 'off'
   unicorn/filename-case:
     - error
     - case: kebabCase
+  unicorn/prevent-abbreviations:
+    - error
+    - whitelist:
+        useRef: true

@@ -16,7 +16,6 @@ rules:
     - declarations
     - at-rules
     - rules
-  order/properties-alphabetical-order: true
   property-no-vendor-prefix: true
   selector-attribute-quotes: always
   selector-no-vendor-prefix: true

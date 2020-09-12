@@ -45,6 +45,17 @@ const configuration = {
         ],
       },
       {
+        test: /\.worker\.js$/i,
+        use: [
+          {
+            loader: 'comlink-loader',
+            options: {
+              singleton: true,
+            },
+          },
+        ],
+      },
+      {
         test: /\.css$/u,
         use: [
           'style-loader',
