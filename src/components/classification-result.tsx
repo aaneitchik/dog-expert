@@ -26,9 +26,8 @@ const ClassificationResult: React.FC<ClassificationResultProps> = ({
   if (dogBreed) {
     return (
       <div className="classification-result__success">
-        It looks like a{' '}
-        <span className="classification-result__breed">{dogBreed}</span>! Here
-        are some more of its pictures for you:
+        Looks like a{' '}
+        <span className="classification-result__breed">{dogBreed}</span>!
       </div>
     );
   }

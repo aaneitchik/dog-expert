@@ -1,0 +1,17 @@
+.dogs-viewer__error {
+  color: #ff3535;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.dogs-viewer__success {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.dogs-viewer__images {
+  display: grid;
+  grid-row-gap: 1rem;
+  justify-items: center;
+  padding: 1rem;
+}

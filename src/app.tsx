@@ -4,6 +4,7 @@ import * as mobilenet from '@tensorflow-models/mobilenet';
 import React, { useEffect, useRef, useState } from 'react';
 
 import ClassificationResult from './components/classification-result';
+import DogsViewer from './components/dogs-viewer';
 import ImageUpload from './components/image-upload';
 import { getDogBreed, preloadModel } from './get-dog-breed.worker';
 
@@ -60,6 +61,7 @@ const App = (): JSX.Element => {
         dogBreed={dogBreed}
         error={classificationError}
       />
+      {!!dogBreed && <DogsViewer breed={dogBreed} />}
     </div>
   );
 };

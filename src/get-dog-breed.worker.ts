@@ -38,5 +38,5 @@ export async function getDogBreed(
   // @ts-ignore: works fine with OffscreenCanvas actually
   const [mostProbableClassification] = await model.classify(canvas);
 
-  return mostProbableClassification.className;
+  return mostProbableClassification.className.split(',')[0];
 }
