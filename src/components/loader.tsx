@@ -9,7 +9,11 @@ interface LoaderProps {
 const Loader: React.FC<LoaderProps> = ({
   className,
 }: LoaderProps): JSX.Element => {
-  return <div className={`loader ${className}`} />;
+  return (
+    <div className={`loader__container ${className}`}>
+      <div className="loader" />
+    </div>
+  );
 };
 
 export default Loader;

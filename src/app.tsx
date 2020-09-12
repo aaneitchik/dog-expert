@@ -43,6 +43,7 @@ const App = (): JSX.Element => {
   ): Promise<void> => {
     setClassificationError(null);
     setIsClassifying(true);
+    setDogBreed(null);
     const breed = await getDogBreed(
       imageUrl,
       width,
@@ -61,7 +62,7 @@ const App = (): JSX.Element => {
         dogBreed={dogBreed}
         error={classificationError}
       />
-      {!!dogBreed && <DogsViewer breed={dogBreed} />}
+      <DogsViewer breed={dogBreed} />
     </div>
   );
 };

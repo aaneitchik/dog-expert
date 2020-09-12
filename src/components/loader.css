@@ -9,10 +9,11 @@
 }
 
 .loader {
+  margin: 0 auto;
   color: #06e0a5;
   text-indent: -9999em;
   position: relative;
-  font-size: var(--loader-size, 10px);
+  font-size: 1em;
   transform: translateZ(0);
   animation-delay: -0.16s;
 }
@@ -44,4 +45,11 @@
     box-shadow: 0 -2em;
     height: 5em;
   }
+}
+
+.loader__container {
+  font-size: var(--loader-size, 10px);
+
+  /* To contain all animated elements */
+  height: calc(var(--loader-size) * 5);
 }

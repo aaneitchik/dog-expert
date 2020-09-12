@@ -15,3 +15,7 @@
   justify-items: center;
   padding: 1rem;
 }
+
+.dogs-viewer__image {
+  max-width: 100%;
+}
