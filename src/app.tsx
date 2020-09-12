@@ -3,11 +3,14 @@ import './app.css';
 import * as mobilenet from '@tensorflow-models/mobilenet';
 import React, { useEffect, useRef, useState } from 'react';
 
+import ClassificationResult from './components/classification-result';
 import ImageUpload from './components/image-upload';
 import { getDogBreed, preloadModel } from './get-dog-breed.worker';
 
 const App = (): JSX.Element => {
   const modelPromise = useRef<Promise<mobilenet.MobileNet> | null>(null);
+  const [isClassifying, setIsClassifying] = useState(false);
+  const [dogBreed, setDogBreed] = useState<string | null>(null);
   const [classificationError, setClassificationError] = useState<string | null>(
     null,
   );
@@ -37,13 +40,26 @@ const App = (): JSX.Element => {
     width: number,
     height: number,
   ): Promise<void> => {
-    await getDogBreed(imageUrl, width, height, modelPromise.current);
+    setClassificationError(null);
+    setIsClassifying(true);
+    const breed = await getDogBreed(
+      imageUrl,
+      width,
+      height,
+      modelPromise.current,
+    );
+    setDogBreed(breed);
+    setIsClassifying(false);
   };
 
   return (
     <div className="app">
       <ImageUpload onImageLoad={handleImageLoad} />
-      {!!classificationError && <div>{classificationError}</div>}
+      <ClassificationResult
+        isClassifying={isClassifying}
+        dogBreed={dogBreed}
+        error={classificationError}
+      />
     </div>
   );
 };

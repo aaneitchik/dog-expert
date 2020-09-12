@@ -1,0 +1,14 @@
+.classification-result__success {
+  text-align: center;
+}
+
+.classification-result__breed {
+  color: #4655ff;
+  font-weight: 700;
+}
+
+.classification-result__loader {
+  --loader-size: 0.25rem;
+
+  margin: 1rem auto;
+}

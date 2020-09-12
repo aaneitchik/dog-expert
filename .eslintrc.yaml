@@ -24,6 +24,7 @@ rules:
   immutable/no-let: 'off'
   immutable/no-mutation: 'off'
   immutable/no-this: 'off'
+  '@typescript-eslint/restrict-template-expressions': 'off'
   '@typescript-eslint/strict-boolean-expressions': 'off'
   max-lines-per-function: 'off'
   max-params: 'off'

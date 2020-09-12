@@ -19,7 +19,7 @@
 .image-upload__btn {
   display: inline-flex;
   align-items: center;
-  margin: 0 auto;
+  margin: 0 auto 2rem auto;
   height: 48px;
   padding: 0 24px;
   color: #282828;
