@@ -21,8 +21,6 @@ const App = (): JSX.Element => {
    * so it's there when we need it
    */
   useEffect((): void => {
-    // No sense in moving this outside, it's a crucial part of this effect
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     const loadModel = async (): Promise<void> => {
       modelPromise.current = preloadModel();
     };

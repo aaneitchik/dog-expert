@@ -9,8 +9,10 @@ interface LoaderProps {
 const Loader: React.FC<LoaderProps> = ({
   className,
 }: LoaderProps): JSX.Element => {
+  const additionalClassName = className ? ` ${className}` : '';
+
   return (
-    <div className={`loader__container ${className}`}>
+    <div className={`loader__container${additionalClassName}`}>
       <div className="loader" />
     </div>
   );

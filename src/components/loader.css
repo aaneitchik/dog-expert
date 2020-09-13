@@ -12,9 +12,8 @@
   margin: 0 auto;
   color: #06e0a5;
   text-indent: -9999em;
-  position: relative;
   font-size: 1em;
-  transform: translateZ(0);
+  transform: translateY(2em) translateZ(0);
   animation-delay: -0.16s;
 }
 
@@ -48,8 +47,10 @@
 }
 
 .loader__container {
-  font-size: var(--loader-size, 10px);
+  --loader-size: 0.25rem;
+
+  font-size: var(--loader-size);
 
   /* To contain all animated elements */
-  height: calc(var(--loader-size) * 5);
+  height: calc(var(--loader-size) * 7);
 }

@@ -8,7 +8,9 @@
 }
 
 .classification-result__loader {
-  --loader-size: 0.25rem;
+  margin-bottom: 0.5rem;
+}
 
-  margin: 1rem auto;
+.classification-result__classifying {
+  text-align: center;
 }

@@ -20,7 +20,12 @@ const ClassificationResult: React.FC<ClassificationResultProps> = ({
   }
 
   if (isClassifying) {
-    return <Loader className="classification-result__loader" />;
+    return (
+      <div className="classification-result__classifying">
+        <Loader className="classification-result__loader" />
+        Classifying...
+      </div>
+    );
   }
 
   if (dogBreed) {

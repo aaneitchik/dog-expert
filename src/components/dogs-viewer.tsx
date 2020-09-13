@@ -2,8 +2,17 @@ import './dogs-viewer.css';
 
 import React, { useEffect, useState } from 'react';
 
+import Loader from './loader';
+
 interface AllBreeds {
   [breed: string]: string[] | undefined;
+}
+
+interface Image {
+  url: string;
+  altText: string;
+  // It is not provided by the API, we add id later to use as key
+  id?: number;
 }
 
 const checkIfBreedAndSubbreedExist = (
@@ -56,17 +65,25 @@ interface DogsViewerProps {
   breed: string | null;
 }
 
+const PAGE_SIZE = 5;
+// Use id as a key for images, since they can be duplicated
+let imageIdIncrement = 1;
+
 const DogsViewer: React.FC<DogsViewerProps> = ({
   breed,
 }: DogsViewerProps): JSX.Element | null => {
+  const [pageCount, setPageCount] = useState(1);
+  // We'll save the reference as state to react to its changes
+  const [
+    loadMoreReference,
+    setLoadMoreReference,
+  ] = useState<HTMLDivElement | null>(null);
   const [allBreeds, setAllBreeds] = useState<AllBreeds | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [images, setImages] = useState<Image[]>([]);
 
   // Preload dog breeds, we'll need them later for better image search
   useEffect((): void => {
-    // No sense in moving this outside, it's a crucial part of this effect
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     const fetchAllBreeds = async (): Promise<void> => {
       const response = await fetch('https://dog.ceo/api/breeds/list/all');
       const json = await response.json();
@@ -87,20 +104,23 @@ const DogsViewer: React.FC<DogsViewerProps> = ({
       return;
     }
 
-    // No sense in moving this outside, it's a crucial part of this effect
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     const fetchImages = async (): Promise<void> => {
       try {
         const breedUrl = getBreedUrl(breed.toLowerCase(), allBreeds);
         const response = await fetch(
-          `https://dog.ceo/api/breed/${breedUrl}/images/random/3`,
+          `https://dog.ceo/api/breed/${breedUrl}/images/random/${PAGE_SIZE}/alt`,
         );
         const json = await response.json();
 
         if (json.status === 'error') {
           setErrorMessage(`Sorry, couldn't find images for ${breed}`);
         } else {
-          setImageUrls(json.message);
+          setImages((existingImages: Image[]): Image[] => [
+            ...existingImages,
+            ...json.message.map(
+              (image: Image): Image => ({ ...image, id: imageIdIncrement++ }),
+            ),
+          ]);
         }
       } catch (error) {
         setErrorMessage(`Sorry, couldn't load images for ${breed}`);
@@ -110,7 +130,34 @@ const DogsViewer: React.FC<DogsViewerProps> = ({
     // This is the way to call an async function in useEffect
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchImages();
-  }, [breed, allBreeds]);
+    // We'll use pageCount as a trigger to fetch more images
+  }, [breed, allBreeds, pageCount]);
+
+  // IntersectionObserver to load more images
+  useEffect((): (() => void) => {
+    const handleObserver = ([target]: IntersectionObserverEntry[]): void => {
+      if (target.isIntersecting) {
+        setPageCount((previousCount: number): number => previousCount + 1);
+      }
+    };
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.25,
+    };
+    const observer = new IntersectionObserver(handleObserver, observerOptions);
+
+    if (loadMoreReference) {
+      observer.observe(loadMoreReference);
+    }
+
+    return (): void => {
+      if (loadMoreReference && observer) {
+        observer.unobserve(loadMoreReference);
+      }
+    };
+  }, [loadMoreReference]);
 
   if (!breed) {
     return null;
@@ -122,22 +169,23 @@ const DogsViewer: React.FC<DogsViewerProps> = ({
 
   return (
     <div>
-      {!!imageUrls.length && (
-        <div className="dogs-viewer__success">
-          Here are some more pictures for you:
-        </div>
-      )}
+      <div className="dogs-viewer__success">
+        Here are some more pictures for you:
+      </div>
       <div className="dogs-viewer__images">
-        {imageUrls.map(
-          (image: string): JSX.Element => (
+        {images.map(
+          (image: Image): JSX.Element => (
             <img
-              key={image}
-              src={image}
-              alt={breed}
+              key={image.id}
+              src={image.url}
+              alt={image.altText}
               className="dogs-viewer__image"
             />
           ),
         )}
+        <div ref={setLoadMoreReference}>
+          <Loader />
+        </div>
       </div>
     </div>
   );
