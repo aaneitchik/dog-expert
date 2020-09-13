@@ -72,7 +72,7 @@ const configuration = {
   output: {
     filename: 'chunks/[name].js',
     pathinfo: true,
-    publicPath: '/',
+    publicPath: '',
   },
   plugins: [
     new CleanWebpackPlugin({
