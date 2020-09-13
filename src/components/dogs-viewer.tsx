@@ -105,6 +105,8 @@ const DogsViewer: React.FC<DogsViewerProps> = ({
     }
 
     const fetchImages = async (): Promise<void> => {
+      setErrorMessage(null);
+
       try {
         const breedUrl = getBreedUrl(breed.toLowerCase(), allBreeds);
         const response = await fetch(
