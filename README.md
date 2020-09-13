@@ -4,6 +4,10 @@ Takes an image uploaded by the user and recognizes its breed by using a
 pre-trained TensorFlow.js model [MobileNet]. Then displays images of dogs of the
 same breed (fetched from [Dog API]) in an inifitely scrollable gallery.
 
+You can see the demo [here] (Chrome only)
+
+![Dog expert](https://user-images.githubusercontent.com/11046028/93025940-db71de00-f60a-11ea-92ad-c72e2853eeab.jpg)
+
 ## Available scripts
 
 To start the project, simply run:
@@ -43,3 +47,4 @@ Started this as a test assignment from [this boilerplate]
 [dog api]: https://dog.ceo/dog-api/
 [this boilerplate]: https://github.com/ridedott/frontend-assignment-boilerplate
 [comlink-loader]: https://github.com/GoogleChromeLabs/comlink-loader
+[here]: https://aaneitchik.github.io/dog-expert
