@@ -1,37 +1,38 @@
-# Front End Assignment Boilerplate
+# Dog expert
 
-This project can serve as a baseline for your front end assignment. Take some
-time to familiarize yourself with the structure, configuration and scripts.
-Depending on how you choose to implement your solution you may find that you
-need to delete or change parts of this base setup — feel free to do so. We have
-set this project up create a more accurate image of what our expectations are,
-and to help you get started. If you feel like it does not help you on your way,
-feel free to discard it and create your own. However, it might prove useful to
-look through this boilerplate regardless to get a better idea of our
-expectations.
-
-Simply clone this project and get started. You can replace this readme with your
-own when you are finished.
+Takes an image uploaded by the user and recognizes its breed by using a
+pre-trained TensorFlow.js model [MobileNet]. Then displays images of dogs of the
+same breed (fetched from [Dog API]) in an inifitely scrollable gallery.
 
 ## Available scripts
 
 To start the project, simply run:
 
 ```bash
+npm install   // first time only
 npm run start
 ```
 
-To run the linter, execute the command:
+## Some technical details
 
-```bash
-npm run lint
-```
+- Project is written in TypeScript, this is actually my first time using it
+- To reduce the load on the main thread, all image classification happens inside
+  a separate Web Worker. For easier usage, Web Worker is loaded with
+  [comlink-loader]
+- The MobileNet model requires an image to be passed to its `classify` method
+  and since it happens in a Web Worker, `OffscreenCanvas` is used.
+- Infinite scroll implemented with `IntersectionObserver`
 
-optionally, you can append `:fix` to automatically fix any auto-fixable linting
-issues.
+## Browser support
 
-To test you application, use:
+Since it uses `OffscreenCanvas`, at the time of writing it works only in
+Chromium browsers (or can be enabled via a flag in Firefox).
 
-```bash
-npm run test
-```
+## Credits
+
+Started this as a test assignment from [this boilerplate]
+
+[mobilenet]: https://github.com/tensorflow/tfjs-models/tree/master/mobilenet
+[dog api]: https://dog.ceo/dog-api/
+[this boilerplate]: https://github.com/ridedott/frontend-assignment-boilerplate
+[comlink-loader]: https://github.com/GoogleChromeLabs/comlink-loader
