@@ -31,6 +31,17 @@ const configuration = {
         test: /\.html$/u,
       },
       {
+        test: /\.worker\.(js|ts)$/i,
+        use: [
+          {
+            loader: 'comlink-loader',
+            options: {
+              singleton: true,
+            },
+          },
+        ],
+      },
+      {
         test: /\.tsx?$/u,
         use: [
           {
@@ -40,17 +51,6 @@ const configuration = {
               experimentalFileCaching: true,
               experimentalWatchApi: true,
               transpileOnly: true,
-            },
-          },
-        ],
-      },
-      {
-        test: /\.worker\.js$/i,
-        use: [
-          {
-            loader: 'comlink-loader',
-            options: {
-              singleton: true,
             },
           },
         ],

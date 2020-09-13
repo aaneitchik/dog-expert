@@ -2,15 +2,17 @@ import '@tensorflow/tfjs';
 
 import * as mobilenet from '@tensorflow-models/mobilenet';
 
-export async function preloadModel(): Promise<mobilenet.MobileNet> {
-  return mobilenet.load();
+let modelPromise: Promise<mobilenet.MobileNet> | undefined;
+
+export async function preloadModel(): Promise<void> {
+  modelPromise = mobilenet.load();
+  await modelPromise;
 }
 
 export async function getDogBreed(
   imageUrl: string,
   width: number,
   height: number,
-  modelPromise: Promise<mobilenet.MobileNet> | null,
 ): Promise<string> {
   const response = await fetch(imageUrl);
   const blob = await response.blob();
@@ -26,13 +28,11 @@ export async function getDogBreed(
   context.drawImage(imageBitmap, 0, 0);
 
   // In case for some reason we didn't start the preload
-  let modelPreload = modelPromise;
-
-  if (!modelPreload) {
-    modelPreload = preloadModel();
+  if (!modelPromise) {
+    await preloadModel();
   }
 
-  const model = await modelPreload;
+  const model = await modelPromise;
   // The first classification has more probability
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore: works fine with OffscreenCanvas actually

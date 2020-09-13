@@ -21,6 +21,7 @@ rules:
     - always
     - ignoreConsecutiveComments: true
   func-style: 'off'
+  init-declarations: 'off'
   immutable/no-let: 'off'
   immutable/no-mutation: 'off'
   immutable/no-this: 'off'

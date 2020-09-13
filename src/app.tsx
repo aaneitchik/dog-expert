@@ -1,7 +1,6 @@
 import './app.css';
 
-import * as mobilenet from '@tensorflow-models/mobilenet';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import ClassificationResult from './components/classification-result';
 import DogsViewer from './components/dogs-viewer';
@@ -9,7 +8,6 @@ import ImageUpload from './components/image-upload';
 import { getDogBreed, preloadModel } from './get-dog-breed.worker';
 
 const App = (): JSX.Element => {
-  const modelPromise = useRef<Promise<mobilenet.MobileNet> | null>(null);
   const [isClassifying, setIsClassifying] = useState(false);
   const [dogBreed, setDogBreed] = useState<string | null>(null);
   const [classificationError, setClassificationError] = useState<string | null>(
@@ -22,16 +20,16 @@ const App = (): JSX.Element => {
    */
   useEffect((): void => {
     const loadModel = async (): Promise<void> => {
-      modelPromise.current = preloadModel();
+      try {
+        await preloadModel();
+      } catch {
+        setClassificationError(`Couldn't load model`);
+      }
     };
 
-    try {
-      // This is the way to call an async function in useEffect
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      loadModel();
-    } catch {
-      setClassificationError(`Couldn't load model`);
-    }
+    // This is the way to call an async function in useEffect
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    loadModel();
   }, []);
 
   const handleImageLoad = async (
@@ -42,12 +40,7 @@ const App = (): JSX.Element => {
     setClassificationError(null);
     setIsClassifying(true);
     setDogBreed(null);
-    const breed = await getDogBreed(
-      imageUrl,
-      width,
-      height,
-      modelPromise.current,
-    );
+    const breed = await getDogBreed(imageUrl, width, height);
     setDogBreed(breed);
     setIsClassifying(false);
   };
