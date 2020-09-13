@@ -1,26 +1,12 @@
-const { join } = require('path');
-
 const autoPrefixer = require('autoprefixer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
 
 const configuration = {
   cache: true,
-  devServer: {
-    compress: false,
-    contentBase: join(__dirname, 'dist'),
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
-    overlay: true,
-    writeToDisk: false,
-  },
-  devtool: 'cheap-module-eval-source-map',
   entry: {
     app: './src/index.tsx',
   },
-  mode: 'development',
   module: {
     rules: [
       {
@@ -88,9 +74,6 @@ const configuration = {
     pathinfo: true,
     publicPath: '/',
   },
-  performance: {
-    hints: false,
-  },
   plugins: [
     new CleanWebpackPlugin({
       cleanStaleWebpackAssets: true,
@@ -103,17 +86,10 @@ const configuration = {
       minify: false,
       template: 'src/index.html',
     }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development'),
-    }),
   ],
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
     mainFields: ['browser', 'module', 'main'],
-  },
-  watch: true,
-  watchOptions: {
-    ignored: /node_modules/u,
   },
 };
 

@@ -13,6 +13,13 @@ npm install   // first time only
 npm run start
 ```
 
+To create and then serve your own build:
+
+```bash
+npm run build
+npx serve dist
+```
+
 ## Some technical details
 
 - Project is written in TypeScript, this is actually my first time using it
