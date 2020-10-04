@@ -3,7 +3,11 @@ import './image-upload.css';
 import React, { useRef, useState } from 'react';
 
 interface ImageUploadProps {
-  onImageLoad: (imageUrl: string, width: number, height: number) => void;
+  onImageLoad: (
+    imageSource: string | ImageData,
+    width: number,
+    height: number,
+  ) => void;
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({
@@ -29,7 +33,36 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
     // Get original dimensions, it improves classification
     const { naturalWidth, naturalHeight } = imageReference.current;
-    onImageLoad(uploadedImageUrl, naturalWidth, naturalHeight);
+
+    /**
+     * If the browser supports OffscreenCanvas, we'll just get
+     * all image data in the web worker.
+     * If not, we need to get something serializable here,
+     * so that we're able pass it to the worker for classification
+     */
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    if (window.OffscreenCanvas) {
+      onImageLoad(uploadedImageUrl, naturalWidth, naturalHeight);
+    } else {
+      const canvas = document.createElement('canvas');
+      canvas.width = naturalWidth;
+      canvas.height = naturalHeight;
+      const context = canvas.getContext('2d');
+
+      if (!context) {
+        return;
+      }
+
+      context.drawImage(
+        imageReference.current,
+        0,
+        0,
+        naturalWidth,
+        naturalHeight,
+      );
+      const imageData = context.getImageData(0, 0, naturalWidth, naturalHeight);
+      onImageLoad(imageData, naturalWidth, naturalHeight);
+    }
   };
 
   return (

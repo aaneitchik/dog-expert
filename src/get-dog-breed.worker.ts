@@ -9,11 +9,11 @@ export async function preloadModel(): Promise<void> {
   await modelPromise;
 }
 
-export async function getDogBreed(
+export async function getOffscreenCanvasFromImageUrl(
   imageUrl: string,
   width: number,
   height: number,
-): Promise<string> {
+): Promise<OffscreenCanvas> {
   const response = await fetch(imageUrl);
   const blob = await response.blob();
   const imageBitmap = await createImageBitmap(blob);
@@ -27,6 +27,19 @@ export async function getDogBreed(
 
   context.drawImage(imageBitmap, 0, 0);
 
+  return canvas;
+}
+
+export async function getDogBreed(
+  source: string | ImageData,
+  width: number,
+  height: number,
+): Promise<string> {
+  const imageSource =
+    typeof source === 'string'
+      ? await getOffscreenCanvasFromImageUrl(source, width, height)
+      : source;
+
   // In case for some reason we didn't start the preload
   if (!modelPromise) {
     await preloadModel();
@@ -36,7 +49,7 @@ export async function getDogBreed(
   // The first classification has more probability
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore: works fine with OffscreenCanvas actually
-  const [mostProbableClassification] = await model.classify(canvas);
+  const [mostProbableClassification] = await model.classify(imageSource);
 
   return mostProbableClassification.className.split(',')[0];
 }

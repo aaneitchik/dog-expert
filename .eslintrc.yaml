@@ -29,6 +29,7 @@ rules:
   '@typescript-eslint/strict-boolean-expressions': 'off'
   max-lines-per-function: 'off'
   max-params: 'off'
+  max-statements: 'off'
   no-implicit-coercion: 'off'
   react/prop-types: 'off'
   unicorn/consistent-function-scoping: 'off'

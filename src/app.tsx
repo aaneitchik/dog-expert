@@ -33,14 +33,14 @@ const App = (): JSX.Element => {
   }, []);
 
   const handleImageLoad = async (
-    imageUrl: string,
+    imageSource: string | ImageData,
     width: number,
     height: number,
   ): Promise<void> => {
     setClassificationError(null);
     setIsClassifying(true);
     setDogBreed(null);
-    const breed = await getDogBreed(imageUrl, width, height);
+    const breed = await getDogBreed(imageSource, width, height);
     setDogBreed(breed);
     setIsClassifying(false);
   };
