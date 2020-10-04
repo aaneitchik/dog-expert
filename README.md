@@ -2,9 +2,9 @@
 
 Takes an image uploaded by the user and recognizes its breed by using a
 pre-trained TensorFlow.js model [MobileNet]. Then displays images of dogs of the
-same breed (fetched from [Dog API]) in an inifitely scrollable gallery.
+same breed (fetched from [Dog API]) in an infinitely scrollable gallery.
 
-You can see the demo [here] (Chrome only)
+You can see the demo [here]
 
 ![Dog expert](https://user-images.githubusercontent.com/11046028/93025940-db71de00-f60a-11ea-92ad-c72e2853eeab.jpg)
 
@@ -30,14 +30,11 @@ npx serve dist
 - To reduce the load on the main thread, all image classification happens inside
   a separate Web Worker. For easier usage, Web Worker is loaded with
   [comlink-loader]
-- The MobileNet model requires an image to be passed to its `classify` method
-  and since it happens in a Web Worker, `OffscreenCanvas` is used.
+- The MobileNet model requires an image to be passed to its `classify` method.
+  If the browser supports `OffscreenCanvas`, it is used to create an image
+  inside a Web Worker. If not, a regular canvas is created on the main thread,
+  and then `ImageData` is passed to the Web Worker for classification.
 - Infinite scroll implemented with `IntersectionObserver`
-
-## Browser support
-
-Since it uses `OffscreenCanvas`, at the time of writing it works only in
-Chromium browsers (or can be enabled via a flag in Firefox).
 
 ## Credits
 
