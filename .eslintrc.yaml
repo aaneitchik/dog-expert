@@ -1,16 +1,17 @@
 env:
   browser: true
-  es6: true
-  node: true
+  es2020: true
 extends:
   - '@ridedott/eslint-config'
   - 'plugin:react/recommended'
   - 'plugin:jsx-a11y/recommended'
   - 'plugin:react-hooks/recommended'
 overrides:
-  - files: ./src/**/*spec.ts
+  - files: ./src/**/__tests__/*.{ts,tsx}
     rules:
+      '@typescript-eslint/explicit-function-return-type': 'off'
       '@typescript-eslint/no-magic-numbers': 'off'
+      'jest/prefer-expect-assertions': 'off'
 parserOptions:
   ecmaVersion: 10
   project: tsconfig.json
@@ -25,6 +26,8 @@ rules:
   immutable/no-let: 'off'
   immutable/no-mutation: 'off'
   immutable/no-this: 'off'
+  jest/consistent-test-it: ['error', { fn: 'test', withinDescribe: 'test' }]
+  jest/expect-expect: 'off'
   '@typescript-eslint/init-declarations': 'off'
   '@typescript-eslint/member-ordering': 'off'
   '@typescript-eslint/restrict-template-expressions': 'off'
