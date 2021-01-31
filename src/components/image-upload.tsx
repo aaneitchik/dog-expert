@@ -18,7 +18,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
 
   const handleImageChange = async (): Promise<void> => {
-    if (!inputReference?.current?.files?.[0]) {
+    if (!inputReference.current?.files?.[0]) {
       return;
     }
 

@@ -25,18 +25,19 @@ rules:
   immutable/no-let: 'off'
   immutable/no-mutation: 'off'
   immutable/no-this: 'off'
+  '@typescript-eslint/init-declarations': 'off'
+  '@typescript-eslint/member-ordering': 'off'
   '@typescript-eslint/restrict-template-expressions': 'off'
+  '@typescript-eslint/sort-type-union-intersection-members': 'off'
   '@typescript-eslint/strict-boolean-expressions': 'off'
   max-lines-per-function: 'off'
   max-params: 'off'
   max-statements: 'off'
+  multiline-comment-style: 'off'
   no-implicit-coercion: 'off'
   react/prop-types: 'off'
   unicorn/consistent-function-scoping: 'off'
   unicorn/filename-case:
     - error
     - case: kebabCase
-  unicorn/prevent-abbreviations:
-    - error
-    - whitelist:
-        useRef: true
+  unicorn/prevent-abbreviations: 'off'

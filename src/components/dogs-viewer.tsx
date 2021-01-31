@@ -19,9 +19,7 @@ const checkIfBreedAndSubbreedExist = (
   breed: string,
   subbreed: string,
   allBreeds: AllBreeds,
-): boolean => {
-  return !!allBreeds[breed]?.includes(subbreed);
-};
+): boolean => !!allBreeds[breed]?.includes(subbreed);
 
 /**
  * The API isn't perfect, and some breeds are divided into sub-breeds.
@@ -124,7 +122,7 @@ const DogsViewer: React.FC<DogsViewerProps> = ({
             ),
           ]);
         }
-      } catch (error) {
+      } catch (error: unknown) {
         setErrorMessage(`Sorry, couldn't load images for ${breed}`);
       }
     };
@@ -155,7 +153,7 @@ const DogsViewer: React.FC<DogsViewerProps> = ({
     }
 
     return (): void => {
-      if (loadMoreReference && observer) {
+      if (loadMoreReference) {
         observer.unobserve(loadMoreReference);
       }
     };

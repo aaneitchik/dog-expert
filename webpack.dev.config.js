@@ -13,7 +13,6 @@ module.exports = merge(common, {
     overlay: true,
     writeToDisk: false,
   },
-  devtool: 'cheap-module-eval-source-map',
   watch: true,
   watchOptions: {
     ignored: /node_modules/u,

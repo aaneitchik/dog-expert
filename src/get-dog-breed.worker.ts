@@ -47,8 +47,7 @@ export async function getDogBreed(
 
   const model = await modelPromise;
   // The first classification has more probability
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore: works fine with OffscreenCanvas actually
+  // @ts-expect-error: works fine with OffscreenCanvas actually
   const [mostProbableClassification] = await model.classify(imageSource);
 
   return mostProbableClassification.className.split(',')[0];

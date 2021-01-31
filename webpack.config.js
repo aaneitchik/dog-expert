@@ -1,4 +1,3 @@
-const autoPrefixer = require('autoprefixer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -11,9 +10,6 @@ const configuration = {
     rules: [
       {
         loader: 'html-loader',
-        options: {
-          attrs: ['img:src', 'link:href'],
-        },
         test: /\.html$/u,
       },
       {
@@ -49,7 +45,9 @@ const configuration = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: () => [autoPrefixer()],
+              postcssOptions: {
+                plugins: [['autoprefixer']],
+              },
               sourceMap: true,
             },
           },
@@ -61,7 +59,7 @@ const configuration = {
           {
             loader: 'file-loader',
             options: {
-              name: '[hash].[ext]',
+              name: '[fullhash].[ext]',
               outputPath: 'assets/images',
             },
           },
