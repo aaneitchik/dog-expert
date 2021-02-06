@@ -84,6 +84,8 @@
     "start": "webpack serve --config ./webpack.dev.config.js",
     "build": "webpack --config ./webpack.prod.config.js",
     "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "types": "tsc --noEmit"
   },
   "version": "1.0.0"

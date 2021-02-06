@@ -41,3 +41,6 @@ dist
 
 # Webstorm-specific files
 .idea
+
+# Test coverage
+coverage
