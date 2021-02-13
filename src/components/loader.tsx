@@ -12,7 +12,10 @@ const Loader: React.FC<LoaderProps> = ({
   const additionalClassName = className ? ` ${className}` : '';
 
   return (
-    <div className={`loader__container${additionalClassName}`}>
+    <div
+      role="progressbar"
+      className={`loader__container${additionalClassName}`}
+    >
       <div className="loader" />
     </div>
   );

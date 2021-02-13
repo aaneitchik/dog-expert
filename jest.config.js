@@ -4,6 +4,7 @@ module.exports = {
   moduleNameMapper: {
     '\\.css$': require.resolve('./test/style-mock.ts'),
   },
+  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
   collectCoverageFrom: ['**/src/**/*.{ts,tsx}'],
   coverageThreshold: {
     global: {
