@@ -62,7 +62,7 @@ const DogsViewer: React.FC<DogsViewerProps> = ({
       try {
         const breedUrl = getBreedUrl(breed.toLowerCase(), allBreeds);
         const response = await fetch(
-          `https://dog.ceo/api/breed/${breedUrl}/images/random/${PAGE_SIZE}/alt`,
+          `https://dog.ceo/api/breed/${breedUrl}/images/random/${PAGE_SIZE}`,
         );
         const json = await response.json();
 

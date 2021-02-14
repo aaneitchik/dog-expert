@@ -16,7 +16,7 @@ const ClassificationResult: React.FC<ClassificationResultProps> = ({
   error,
 }: ClassificationResultProps): JSX.Element | null => {
   if (error) {
-    return <div>error</div>;
+    return <div role="alert">{error}</div>;
   }
 
   if (isClassifying) {
@@ -32,8 +32,8 @@ const ClassificationResult: React.FC<ClassificationResultProps> = ({
   if (dogBreed) {
     return (
       <div className="classification-result__success">
-        Looks like a{' '}
-        <span className="classification-result__breed">{dogBreed}</span>!
+        Looks like a
+        <span className="classification-result__breed"> {dogBreed}</span>!
       </div>
     );
   }
