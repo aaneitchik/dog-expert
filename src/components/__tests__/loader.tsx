@@ -14,3 +14,11 @@ test('renders loader with className', () => {
 
   expect(screen.getByRole('progressbar')).toHaveClass('loader--default');
 });
+
+test('renders loader with message', () => {
+  render(<Loader>Classifying...</Loader>);
+
+  const loader = screen.getByRole('progressbar');
+  expect(loader).toBeVisible();
+  expect(loader).toHaveTextContent('Classifying');
+});

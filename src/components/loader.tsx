@@ -4,10 +4,12 @@ import React from 'react';
 
 interface LoaderProps {
   className?: string;
+  children?: React.ReactNode;
 }
 
 const Loader: React.FC<LoaderProps> = ({
   className,
+  children,
 }: LoaderProps): JSX.Element => {
   const additionalClassName = className ? ` ${className}` : '';
 
@@ -16,7 +18,10 @@ const Loader: React.FC<LoaderProps> = ({
       role="progressbar"
       className={`loader__container${additionalClassName}`}
     >
-      <div className="loader" />
+      <div className="loader__animation-container">
+        <div className="loader" />
+      </div>
+      {children && <div>{children}</div>}
     </div>
   );
 };

@@ -2,7 +2,7 @@
 .loader,
 .loader::before,
 .loader::after {
-  background: #06e0a5;
+  background-color: #06e0a5;
   animation: load 1s infinite ease-in-out;
   width: 1em;
   height: 4em;
@@ -12,7 +12,7 @@
   margin: 0 auto;
   color: #06e0a5;
   text-indent: -9999em;
-  font-size: 1em;
+  font-size: var(--loader-size);
   transform: translateY(2em) translateZ(0);
   animation-delay: -0.16s;
 }
@@ -33,6 +33,10 @@
   left: 1.5em;
 }
 
+.loader:not(.loader:last-child) {
+  margin-bottom: 0.5em;
+}
+
 @keyframes load {
   0%,
   80%,
@@ -49,8 +53,14 @@
 .loader__container {
   --loader-size: 0.25rem;
 
-  font-size: var(--loader-size);
+  line-height: 1.5;
+}
 
+.loader__animation-container {
   /* To contain all animated elements */
   height: calc(var(--loader-size) * 7);
+}
+
+.loader__animation-container:not(:last-child) {
+  margin-bottom: 0.5em;
 }

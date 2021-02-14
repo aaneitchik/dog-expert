@@ -22,8 +22,9 @@ const ClassificationResult: React.FC<ClassificationResultProps> = ({
   if (isClassifying) {
     return (
       <div className="classification-result__classifying">
-        <Loader className="classification-result__loader" />
-        Classifying...
+        <Loader className="classification-result__loader">
+          Classifying...
+        </Loader>
       </div>
     );
   }
