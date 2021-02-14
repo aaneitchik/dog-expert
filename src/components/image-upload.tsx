@@ -27,6 +27,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   };
 
   const handleImageLoad = async (): Promise<void> => {
+    // This is an impossible use case, only there to please TypeScript
+    /* istanbul ignore next */
     if (!imageReference.current || !uploadedImageUrl) {
       return;
     }

@@ -4,7 +4,13 @@ module.exports = {
   moduleNameMapper: {
     '\\.css$': require.resolve('./test/style-mock.ts'),
   },
-  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
+  setupFilesAfterEnv: [
+    '@testing-library/jest-dom/extend-expect',
+    require.resolve('./test/setup.ts'),
+  ],
+  testEnvironmentOptions: {
+    url: 'https://example.com',
+  },
   collectCoverageFrom: ['**/src/**/*.{ts,tsx}'],
   coverageThreshold: {
     global: {
