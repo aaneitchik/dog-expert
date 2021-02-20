@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { axe } from 'jest-axe';
 import React from 'react';
 
 import { createObjectUrlMock } from '../../../test/url-mock';
@@ -12,6 +13,12 @@ test('renders file input', () => {
 
   expect(screen.getByLabelText('Upload image')).toBeVisible();
   expect(screen.getByText('No image uploaded')).toBeVisible();
+});
+
+test('file input is accessible', async () => {
+  const { container } = render(<ImageUpload onImageLoad={noop} />);
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
 });
 
 test('do nothing if there is no file uploaded', () => {

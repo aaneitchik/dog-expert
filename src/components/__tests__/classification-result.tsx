@@ -1,16 +1,20 @@
 import { render, screen } from '@testing-library/react';
+import { axe } from 'jest-axe';
 import React from 'react';
 
 import ClassificationResult from '../classification-result';
 
-test('error message is shown', () => {
-  render(
+test('error message is shown and accessible', async () => {
+  const { container } = render(
     <ClassificationResult
       isClassifying={false}
       dogBreed={null}
       error="Could not load model"
     />,
   );
+
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
 
   const errorMessage = screen.getByRole('alert');
   expect(errorMessage).toBeVisible();
@@ -20,9 +24,8 @@ test('error message is shown', () => {
 test('loader shown if classification is in progress', () => {
   render(<ClassificationResult isClassifying dogBreed={null} error={null} />);
 
-  const loader = screen.getByRole('progressbar');
+  const loader = screen.getByRole('progressbar', { name: 'Classifying...' });
   expect(loader).toBeVisible();
-  expect(loader).toHaveTextContent('Classifying...');
 });
 
 test('dog breed is shown if it is recognized and classification done', () => {

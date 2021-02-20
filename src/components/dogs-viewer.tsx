@@ -138,7 +138,10 @@ const DogsViewer: React.FC<DogsViewerProps> = ({
           ),
         )}
         <div ref={setLoadMoreReference}>
-          <Loader />
+          <Loader
+            message={`Loading ${breed} images...`}
+            isMessageVisible={false}
+          />
         </div>
       </div>
     </div>

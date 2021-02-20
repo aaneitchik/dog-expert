@@ -6,6 +6,7 @@ module.exports = {
   },
   setupFilesAfterEnv: [
     '@testing-library/jest-dom/extend-expect',
+    'jest-axe/extend-expect',
     require.resolve('./test/setup.ts'),
   ],
   testEnvironmentOptions: {
