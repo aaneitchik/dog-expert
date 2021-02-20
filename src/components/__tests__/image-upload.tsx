@@ -104,34 +104,3 @@ test('calls onImageLoad if there is an OffscreenCanvas', async () => {
   // @ts-expect-error: hack to check for window.OffscreenCanvas
   delete window.OffscreenCanvas;
 });
-
-test('does not call onImageUpload if there is no canvas context', async () => {
-  const onImageLoad = jest.fn();
-  render(<ImageUpload onImageLoad={onImageLoad} />);
-
-  const dogImage = new File(['◖⚆ᴥ⚆◗'], 'dog.png', { type: 'image/png' });
-  const fileInput = screen.getByLabelText('Upload image');
-
-  createObjectUrlMock.mockImplementationOnce(() => 'dogImage blob');
-
-  const originalCreateElement = document.createElement.bind(document);
-
-  jest
-    .spyOn(document, 'createElement')
-    // @ts-expect-error: no need to create a full canvas mock
-    .mockImplementation((element: string) =>
-      element === 'canvas'
-        ? {
-            getContext: () => null,
-          }
-        : originalCreateElement(element),
-    );
-
-  userEvent.upload(fileInput, [dogImage]);
-
-  fireEvent.load(screen.getByAltText('Uploaded dog'));
-
-  await waitFor(() => {
-    expect(onImageLoad).not.toHaveBeenCalled();
-  });
-});

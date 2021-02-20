@@ -49,11 +49,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       const canvas = document.createElement('canvas');
       canvas.width = naturalWidth;
       canvas.height = naturalHeight;
-      const context = canvas.getContext('2d');
-
-      if (!context) {
-        return;
-      }
+      // It's ok to make a non-null assertion, created canvas surely has context
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const context = canvas.getContext('2d')!;
 
       context.drawImage(
         imageReference.current,
