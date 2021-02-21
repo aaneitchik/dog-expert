@@ -39,8 +39,10 @@ rules:
   multiline-comment-style: 'off'
   no-implicit-coercion: 'off'
   react/prop-types: 'off'
+  sort-keys: 'off'
   unicorn/consistent-function-scoping: 'off'
   unicorn/filename-case:
     - error
     - case: kebabCase
+  unicorn/expiring-todo-comments: 'off'
   unicorn/prevent-abbreviations: 'off'
