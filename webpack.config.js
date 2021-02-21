@@ -1,5 +1,7 @@
+const autoPrefixer = require('autoprefixer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 const configuration = {
   cache: true,
@@ -10,6 +12,9 @@ const configuration = {
     rules: [
       {
         loader: 'html-loader',
+        options: {
+          attrs: ['img:src', 'link:href'],
+        },
         test: /\.html$/u,
       },
       {
@@ -45,9 +50,7 @@ const configuration = {
           {
             loader: 'postcss-loader',
             options: {
-              postcssOptions: {
-                plugins: [['autoprefixer']],
-              },
+              plugins: () => [autoPrefixer()],
               sourceMap: true,
             },
           },
@@ -59,7 +62,7 @@ const configuration = {
           {
             loader: 'file-loader',
             options: {
-              name: '[fullhash].[ext]',
+              name: '[hash].[ext]',
               outputPath: 'assets/images',
             },
           },
@@ -69,6 +72,7 @@ const configuration = {
   },
   output: {
     filename: 'chunks/[name].js',
+    path: path.join(process.cwd(), 'dist'),
     pathinfo: true,
     publicPath: '',
   },
