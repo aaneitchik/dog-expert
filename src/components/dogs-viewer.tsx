@@ -2,24 +2,13 @@ import './dogs-viewer.css';
 
 import React, { useEffect, useState } from 'react';
 
-import { AllBreeds } from '../types';
-import { getBreedUrl } from '../utils/get-breed-url';
+import { fetchBreeds, fetchImagesForBreed } from '../api';
+import { AllBreeds, Image } from '../types';
 import Loader from './loader';
-
-interface Image {
-  url: string;
-  altText: string;
-  // It is not provided by the API, we add id later to use as key
-  id?: number;
-}
 
 interface DogsViewerProps {
   breed: string | null;
 }
-
-const PAGE_SIZE = 5;
-// Use id as a key for images, since they can be duplicated
-let imageIdIncrement = 1;
 
 const DogsViewer: React.FC<DogsViewerProps> = ({
   breed,
@@ -37,11 +26,12 @@ const DogsViewer: React.FC<DogsViewerProps> = ({
   // Preload dog breeds, we'll need them later for better image search
   useEffect((): void => {
     const fetchAllBreeds = async (): Promise<void> => {
-      const response = await fetch('https://dog.ceo/api/breeds/list/all');
-      const json = await response.json();
+      try {
+        const breeds = await fetchBreeds();
 
-      if (json.status === 'success') {
-        setAllBreeds(json.message);
+        setAllBreeds(breeds);
+      } catch (error: unknown) {
+        setAllBreeds(null);
       }
     };
 
@@ -51,29 +41,23 @@ const DogsViewer: React.FC<DogsViewerProps> = ({
   }, []);
 
   // Fetch images for chosen breed
-  useEffect((): void => {
+  useEffect((): (() => void) | undefined => {
     if (!breed) {
       return;
     }
+
+    let didCancel = false;
 
     const fetchImages = async (): Promise<void> => {
       setErrorMessage(null);
 
       try {
-        const breedUrl = getBreedUrl(breed.toLowerCase(), allBreeds);
-        const response = await fetch(
-          `https://dog.ceo/api/breed/${breedUrl}/images/random/${PAGE_SIZE}`,
-        );
-        const json = await response.json();
+        const breedImages = await fetchImagesForBreed(breed, allBreeds);
 
-        if (json.status === 'error') {
-          setErrorMessage(`Sorry, couldn't find images for ${breed}`);
-        } else {
+        if (!didCancel) {
           setImages((existingImages: Image[]): Image[] => [
             ...existingImages,
-            ...json.message.map(
-              (image: Image): Image => ({ ...image, id: imageIdIncrement++ }),
-            ),
+            ...breedImages,
           ]);
         }
       } catch (error: unknown) {
@@ -84,6 +68,10 @@ const DogsViewer: React.FC<DogsViewerProps> = ({
     // This is the way to call an async function in useEffect
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchImages();
+
+    return (): void => {
+      didCancel = true;
+    };
     // We'll use pageCount as a trigger to fetch more images
   }, [breed, allBreeds, pageCount]);
 
@@ -114,6 +102,10 @@ const DogsViewer: React.FC<DogsViewerProps> = ({
   }, [loadMoreReference]);
 
   if (!breed) {
+    if (allBreeds !== null) {
+      return <p data-testid="breeds-loaded" hidden />;
+    }
+
     return null;
   }
 
@@ -123,6 +115,7 @@ const DogsViewer: React.FC<DogsViewerProps> = ({
 
   return (
     <div>
+      {allBreeds !== null && <p data-testid="breeds-loaded" hidden />}
       <div className="dogs-viewer__success">
         Here are some more pictures for you:
       </div>
