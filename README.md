@@ -1,5 +1,5 @@
 # Dog expert 
-![Coverage status](https://img.shields.io/coveralls/github/aaneitchik/dog-expert)
+[![Coverage status](https://img.shields.io/coveralls/github/aaneitchik/dog-expert?style=for-the-badge)](https://coveralls.io/github/aaneitchik/dog-expert)
 
 Takes an image uploaded by the user and recognizes its breed by using a
 pre-trained TensorFlow.js model [MobileNet]. Then displays images of dogs of the
