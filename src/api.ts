@@ -3,7 +3,7 @@ import { getBreedUrl } from './utils/get-breed-url';
 
 export const DOG_API_BASE_URL = 'https://dog.ceo/api';
 
-const PAGE_SIZE = 5;
+export const PAGE_SIZE = 5;
 
 // Use id as a key for images, since they can be duplicated
 let imageIdIncrement = 1;

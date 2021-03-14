@@ -44,3 +44,7 @@ dist
 
 # Test coverage
 coverage
+
+# Cypress
+cypress/videos
+cypress/screenshots

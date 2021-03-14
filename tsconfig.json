@@ -18,6 +18,7 @@
     "strict": true,
     "strictNullChecks": true,
     "target": "es2019",
+    "types": ["cypress", "@testing-library/cypress", "cypress-file-upload"],
     "typeRoots": ["./@types", "node_modules/@types"],
     "experimentalDecorators": true,
     "incremental": true,
