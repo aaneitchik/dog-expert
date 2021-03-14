@@ -7,7 +7,7 @@ describe('app', () => {
     cy.findByRole('progressbar', { name: 'Classifying...' }).should(
       'be.visible',
     );
-    cy.findByText(/Looks like a/iu)
+    cy.findByText(/Looks like a/iu, { timeout: 15000 })
       .should('be.visible')
       .contains('beagle');
     cy.findAllByAltText('beagle').should('have.length.at.least', PAGE_SIZE);
