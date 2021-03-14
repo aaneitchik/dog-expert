@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "strict": true,
+    "baseUrl": ".",
+    "target": "es2019",
+    "lib": ["esnext", "dom"],
+    "moduleResolution": "node",
+    // be explicit about types included
+    // to avoid clashing with Jest types
+    "types": ["cypress", "@testing-library/cypress", "cypress-file-upload"]
+  },
+  "include": ["./**/*.ts"]
+}

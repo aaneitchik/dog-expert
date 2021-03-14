@@ -1,4 +1,4 @@
-import { PAGE_SIZE } from '../../src/api';
+const DEFAULT_PAGE_SIZE = 5;
 
 describe('app', () => {
   it('recognizes breed from image and shows more images of the same breed', () => {
@@ -10,6 +10,9 @@ describe('app', () => {
     cy.findByText(/Looks like a/iu, { timeout: 15000 })
       .should('be.visible')
       .contains('beagle');
-    cy.findAllByAltText('beagle').should('have.length.at.least', PAGE_SIZE);
+    cy.findAllByAltText('beagle').should(
+      'have.length.at.least',
+      DEFAULT_PAGE_SIZE,
+    );
   });
 });

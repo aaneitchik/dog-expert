@@ -16,6 +16,9 @@ parserOptions:
   ecmaVersion: 10
   project: tsconfig.json
   sourceType: module
+settings:
+  react:
+    version: 'detect'
 rules:
   capitalized-comments:
     - error
@@ -26,6 +29,7 @@ rules:
   immutable/no-let: 'off'
   immutable/no-mutation: 'off'
   immutable/no-this: 'off'
+  import/no-default-export: 'off'
   jest/consistent-test-it: ['error', { fn: 'test', withinDescribe: 'test' }]
   jest/expect-expect: 'off'
   '@typescript-eslint/init-declarations': 'off'
