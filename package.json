@@ -1,11 +1,17 @@
 {
+  "name": "dog-expert",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aaneitchik/dog-expert.git"
+  },
+  "description": "Recognize dog breed from image uploaded by user",
+  "homepage": "https://github.com/aaneitchik/dog-expert",
   "dependencies": {
     "@tensorflow-models/mobilenet": "^2.0.4",
     "@tensorflow/tfjs": "^3.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
-  "description": "Search for dogs",
   "devDependencies": {
     "@ridedott/eslint-config": "^2.7.3",
     "@testing-library/cypress": "^7.0.4",
@@ -81,8 +87,6 @@
       "prettier --write"
     ]
   },
-  "name": "@ridedott/frontend-assignment-base",
-  "repository": "https://github.com/ridedott/frontend-assignment-base",
   "scripts": {
     "format": "prettier --check \"**/*.{css,js,json,md,ts,tsx,yml,yaml}\"",
     "format:fix": "prettier --write \"**/*.{css,js,json,md,ts,tsx,yml,yaml}\"",
