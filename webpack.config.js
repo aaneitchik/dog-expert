@@ -30,15 +30,10 @@ const configuration = {
       },
       {
         test: /\.tsx?$/u,
+        exclude: /node_modules/,
         use: [
           {
-            loader: 'ts-loader',
-            options: {
-              configFile: 'tsconfig.json',
-              experimentalFileCaching: true,
-              experimentalWatchApi: true,
-              transpileOnly: true,
-            },
+            loader: 'babel-loader',
           },
         ],
       },
