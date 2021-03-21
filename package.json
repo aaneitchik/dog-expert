@@ -63,7 +63,6 @@
     "stylelint-config-standard": "^20.0.0",
     "stylelint-order": "^4.1.0",
     "terser-webpack-plugin": "^4.2.3",
-    "ts-jest": "^26.5.2",
     "ts-loader": "^8.0.17",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.5",
@@ -113,21 +112,21 @@
     "build": "webpack --config ./webpack.prod.config.js",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
+    "test:jest:coverage": "jest --coverage",
     "test:e2e": "start-server-and-test start http://localhost:8080 cy:open",
     "test:e2e:coverage": "CODE_COVERAGE=true start-server-and-test start http://localhost:8080 cy:coverage",
     "cy:open": "cypress open",
     "cy:coverage": "cypress run",
+    "mkdir:reports": "mkdir reports || true",
+    "precopy:reports": "npm run mkdir:reports",
+    "copy:reports": "cp cypress-coverage/coverage-final.json reports/from-cypress.json && cp jest-coverage/coverage-final.json reports/from-jest.json",
+    "precombine:reports": "npm run copy:reports && mkdir .nyc_output || true",
+    "combine:reports": "npx nyc merge reports coverage.json && mv coverage.json .nyc_output/out.json",
+    "precoverage-report:merged": "run-p test:*:coverage && npm run combine:reports",
+    "coverage-report:merged": "npx nyc report --reporter lcov --reporter text --report-dir coverage",
     "types": "run-p types:*",
     "types:root": "tsc --noEmit --project tsconfig.json",
     "types:cypress": "tsc --noEmit --project cypress/tsconfig.json"
-  },
-  "nyc": {
-    "all": true,
-    "extends": "@istanbuljs/nyc-config-typescript",
-    "include": "src/**/*.tsx?",
-    "exclude": ["**/__tests__/**/*"],
-    "report-dir": "cypress-coverage"
   },
   "version": "1.0.0"
 }

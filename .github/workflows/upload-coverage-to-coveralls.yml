@@ -16,10 +16,9 @@ jobs:
       - name: Install, Test and Create Coverage Report 🔧
         run: |
           npm install
-          npm run test:coverage
+          npm run coverage-report:merged
 
       - name: Coveralls 🚀
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: './jest-coverage/lcov.info'

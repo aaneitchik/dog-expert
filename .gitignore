@@ -46,7 +46,10 @@ dist
 coverage
 jest-coverage
 cypress-coverage
+
+# Temporary folders used to create test coverage
 .nyc_output
+reports
 
 # Cypress
 cypress/videos
