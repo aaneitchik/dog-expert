@@ -44,6 +44,9 @@ dist
 
 # Test coverage
 coverage
+jest-coverage
+cypress-coverage
+.nyc_output
 
 # Cypress
 cypress/videos

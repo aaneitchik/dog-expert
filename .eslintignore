@@ -6,3 +6,4 @@ package.json
 tsconfig.json
 webpack.*.js
 jest.config.js
+babel.config.js
