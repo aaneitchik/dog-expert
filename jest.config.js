@@ -13,6 +13,7 @@ module.exports = {
     url: 'https://example.com',
   },
   collectCoverageFrom: ['**/src/**/*.{ts,tsx}'],
+  coverageDirectory: 'jest-coverage',
   coverageThreshold: {
     global: {
       statements: 0,
