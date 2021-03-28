@@ -18,6 +18,7 @@ jobs:
 
       - name: Install, Test and Create Coverage Report 🔧
         run: |
+          npm config set unsafe-perm true
           npm install
           sudo npm run coverage-report:merged
 
