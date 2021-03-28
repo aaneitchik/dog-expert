@@ -3,5 +3,6 @@
   "include": "**/*.tsx?",
   "report-dir": "cypress-coverage",
   "require": "ts-node/register",
-  "exclude-after-remap": false
+  "exclude-after-remap": false,
+  "temp-dir": ".nyc_output"
 }
