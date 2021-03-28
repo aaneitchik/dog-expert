@@ -119,7 +119,7 @@
     "cy:coverage": "cypress run",
     "mkdir:reports": "mkdir reports || true",
     "precopy:reports": "npm run mkdir:reports",
-    "copy:reports": "cp cypress-coverage/coverage-final.json reports/from-cypress.json && cp jest-coverage/coverage-final.json reports/from-jest.json",
+    "copy:reports": "cp ./cypress-coverage/coverage-final.json reports/from-cypress.json && cp ./jest-coverage/coverage-final.json reports/from-jest.json",
     "precombine:reports": "npm run copy:reports && mkdir .nyc_output || true",
     "combine:reports": "npx nyc merge reports coverage.json && mv coverage.json .nyc_output/out.json",
     "precoverage-report:merged": "run-p test:*:coverage && npm run combine:reports",
