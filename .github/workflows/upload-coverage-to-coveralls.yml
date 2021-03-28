@@ -19,10 +19,10 @@ jobs:
       - name: Install, Test and Create Coverage Report 🔧
         run: |
           npm install
+          mkdir .nyc_output || true
           npm run test:coverage
           mkdir reports || true
           ls la .nyc_output
-          ls la .
           cp jest-coverage/coverage-final.json reports/from-jest.json
           cp cypress-coverage/coverage-final.json reports/from-cypress.json
           ls la reports
