@@ -20,7 +20,6 @@ jobs:
         run: |
           npm install
           mkdir .nyc_output || true
-          touch .nyc_output/out.json || true
           npm run test:coverage
           mkdir reports || true
           ls -la .nyc_output
