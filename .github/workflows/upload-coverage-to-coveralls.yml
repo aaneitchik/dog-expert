@@ -20,12 +20,13 @@ jobs:
         run: |
           npm install
           mkdir .nyc_output || true
+          touch .nyc_output/out.json || true
           npm run test:coverage
           mkdir reports || true
-          ls la .nyc_output
+          ls -la .nyc_output
           cp jest-coverage/coverage-final.json reports/from-jest.json
           cp cypress-coverage/coverage-final.json reports/from-cypress.json
-          ls la reports
+          ls -la reports
           npx nyc merge reports coverage.json && mv coverage.json .nyc_output/out.json
           npx nyc report --temp-dir .nyc_output --reporter lcov --reporter text --report-dir coverage
 
