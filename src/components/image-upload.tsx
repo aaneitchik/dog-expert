@@ -18,6 +18,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
 
   const handleImageChange = async (): Promise<void> => {
+    // This is an impossible use case, only there to please TypeScript
+    /* istanbul ignore next */
     if (!inputReference.current?.files?.[0]) {
       return;
     }
