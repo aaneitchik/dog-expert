@@ -130,6 +130,7 @@
     "types:cypress": "tsc --noEmit --project cypress/tsconfig.json"
   },
   "nyc": {
+    "extends": "@istanbuljs/nyc-config-typescript",
     "report-dir": "cypress-coverage"
   },
   "version": "1.0.0"

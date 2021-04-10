@@ -21,4 +21,4 @@ jobs:
           npm install
           npm run test:e2e:coverage
           ls -la
-          cat .nyc_output/out.json
+          npx nyc report --reporter=text-summary
