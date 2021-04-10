@@ -19,6 +19,6 @@ jobs:
       - name: Install, Test and Create Coverage Report 🔧
         run: |
           npm install
-          npm run test:e2e:coverage
+          npm run coverage-report:merged
           ls -la
           npx nyc report --reporter=text-summary
