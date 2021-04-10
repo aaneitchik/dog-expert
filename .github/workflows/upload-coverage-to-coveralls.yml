@@ -20,6 +20,4 @@ jobs:
         run: |
           npm install
           npm run test:e2e:coverage
-          mkdir reports || true
-          ls -la .nyc_output
           ls -la
