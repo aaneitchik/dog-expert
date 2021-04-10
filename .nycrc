@@ -1,7 +1,0 @@
-{
-  "extends": "@istanbuljs/nyc-config-typescript",
-  "include": "**/*.tsx?",
-  "report-dir": "cypress-coverage",
-  "require": "ts-node/register",
-  "exclude-after-remap": false
-}
