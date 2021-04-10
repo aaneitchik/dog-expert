@@ -19,17 +19,7 @@ jobs:
       - name: Install, Test and Create Coverage Report 🔧
         run: |
           npm install
-          mkdir .nyc_output || true
-          npm run test:coverage
+          npm run test:e2e:coverage
           mkdir reports || true
           ls -la .nyc_output
-          cp jest-coverage/coverage-final.json reports/from-jest.json
-          cp cypress-coverage/coverage-final.json reports/from-cypress.json
-          ls -la reports
-          npx nyc merge reports coverage.json && mv coverage.json .nyc_output/out.json
-          npx nyc report --temp-dir .nyc_output --reporter lcov --reporter text --report-dir coverage
-
-      - name: Coveralls 🚀
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          ls -la
