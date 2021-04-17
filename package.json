@@ -118,7 +118,7 @@
     "test:e2e": "start-server-and-test start http://localhost:8080 cy:open",
     "test:jest:coverage": "jest --coverage",
     "test:cy-ct:coverage": "CODE_COVERAGE=true cypress run-ct",
-    "test:cy-ct:coverage-for-merged-report": "npm run mkdir:reports && npm run test:cy-ct:coverage && cp cypress-coverage/coverage-final.json reports/from-cy-ct.json && rm -rf .nyc_output",
+    "test:cy-ct:coverage-for-merged-report": "npm run mkdir:reports && npm run test:cy-ct:coverage && cp cypress-coverage/coverage-final.json reports/from-cypress-ct.json && rm -rf .nyc_output",
     "test:e2e:coverage": "CODE_COVERAGE=true start-server-and-test start http://localhost:8080 cy:coverage",
     "test:coverage": "npm run test:cy-ct:coverage-for-merged-report && run-p test:jest:coverage test:e2e:coverage",
     "cy:open": "cypress open",
