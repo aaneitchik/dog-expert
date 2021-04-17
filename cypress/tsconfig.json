@@ -8,7 +8,8 @@
     "moduleResolution": "node",
     // be explicit about types included
     // to avoid clashing with Jest types
-    "types": ["cypress", "@testing-library/cypress", "cypress-file-upload"]
+    "types": ["cypress", "@testing-library/cypress", "cypress-file-upload"],
+    "jsx": "react"
   },
-  "include": ["./**/*.ts"]
+  "include": ["./**/*.ts", "./**/*.tsx"]
 }

@@ -1,8 +1,13 @@
 {
   "root": true,
   "plugins": ["cypress"],
-  "extends": ["plugin:cypress/recommended"],
+  "extends": ["plugin:cypress/recommended", "plugin:react/recommended"],
   "env": {
     "cypress/globals": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }
