@@ -11,6 +11,7 @@ overrides:
     rules:
       '@typescript-eslint/explicit-function-return-type': 'off'
       '@typescript-eslint/no-magic-numbers': 'off'
+      jest/require-hook: 'error'
 parserOptions:
   ecmaVersion: 10
   project: tsconfig.json
@@ -32,6 +33,7 @@ rules:
   jest/consistent-test-it: ['error', { fn: 'test', withinDescribe: 'test' }]
   jest/expect-expect: 'off'
   jest/prefer-expect-assertions: 'off'
+  jest/require-hook: 'off'
   '@typescript-eslint/init-declarations': 'off'
   '@typescript-eslint/member-ordering': 'off'
   '@typescript-eslint/restrict-template-expressions': 'off'

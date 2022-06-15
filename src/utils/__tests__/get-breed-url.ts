@@ -18,7 +18,7 @@ test('returns breed without spaces if it is an available breed', () => {
   const breed = 'german shepherd';
   const allBreeds = { germanshepherd: [] };
 
-  expect(getBreedUrl(breed, allBreeds)).toStrictEqual('germanshepherd');
+  expect(getBreedUrl(breed, allBreeds)).toBe('germanshepherd');
 });
 
 test('returns master/sub-breed', () => {
@@ -27,7 +27,7 @@ test('returns master/sub-breed', () => {
     bulldog: ['boston', 'english', 'french'],
   };
 
-  expect(getBreedUrl(breed, allBreeds)).toStrictEqual('bulldog/french');
+  expect(getBreedUrl(breed, allBreeds)).toBe('bulldog/french');
 });
 
 test('returns sub-breed/master', () => {
@@ -36,12 +36,12 @@ test('returns sub-breed/master', () => {
     australian: ['shepherd'],
   };
 
-  expect(getBreedUrl(breed, allBreeds)).toStrictEqual('australian/shepherd');
+  expect(getBreedUrl(breed, allBreeds)).toBe('australian/shepherd');
 });
 
 test('returns breed if none of transformations to find it in the breeds worked', () => {
   const breed = 'cardigan welsh corgi';
   const allBreeds = { beagle: [] };
 
-  expect(getBreedUrl(breed, allBreeds)).toStrictEqual('cardigan welsh corgi');
+  expect(getBreedUrl(breed, allBreeds)).toBe('cardigan welsh corgi');
 });
